@@ -1,20 +1,22 @@
 const imgs = document.getElementsByTagName("img");
-const timerCount = document.getElementById("timerCount")
+const timerCount = document.getElementById("timerCount");
+const btnStart = document.getElementById("btnStart");
 let player = "";
 let ai = "";
 let playerPoint = 0;
 let aiPoint = 0
 const choose = ["pierre","feuille","ciseaux"];
-
-
+let seconde = 3;
 
 for(const img of imgs){
     img.addEventListener("click", ()=>{
         player = img.id;
-        ai = choose[Math.floor(Math.random() * 3)];
-        winner(player, ai);
+        // ai = choose[Math.floor(Math.random() * 3)];
+        
         console.log(player)
-        console.log(ai)
+
+        // img.classList.add("select")
+
     })
 }
 
@@ -30,4 +32,18 @@ function winner(player, ai){
         console.log("lose")
     }
 }
+
+
+let start = setInterval(()=>{
+    timerCount.textContent = seconde;
+    
+    if(seconde === 0){
+        // end = true;
+        clearInterval(start)
+        ai = choose[Math.floor(Math.random() * 3)];
+        console.log(ai)
+        winner(player, ai);
+    }
+    seconde--;
+}, 1000);
 
